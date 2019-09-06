@@ -1,0 +1,29 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  application:
+    name:  trend-trading-backtest-service
+  zipkin:
+    base-url: http://localhost:9411
+
+feign.hystrix.enabled: true
+
+hystrix:
+  command:
+    "IndexDataClient#getIndexData(String)":
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 9000
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 9000
+
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
+
